@@ -55,6 +55,24 @@ Implement the High-Level Design produced in
 `vnet-avd-lab-sec`. Region short codes in
 [`.github/skills/avd-landing-zone/references/regions.md`](../.github/skills/avd-landing-zone/references/regions.md).
 
+## Intentional track-idiomatic differences
+
+Both tracks expose the **same input/output names** (above) and the **same
+`sessionHostAdminPassword` parameter with an empty default**, but resolve an unset password using
+each tool's idiomatic, secure primitive:
+
+- **Bicep** — `sessionHostAdminPassword` is a `@secure()` parameter you supply at deploy time
+  (env var or Key Vault reference). Bicep has no native random-secret generator, so a
+  learner-supplied secure value is the idiomatic, auditable pattern. Required only when
+  `deploySessionHosts = true`.
+- **Terraform** — when left empty, a `random_password` is generated and stored in Key Vault
+  (surfaced via the track's `keyVaultName` / `keyVaultUri` outputs), so `apply` runs unattended.
+
+Net effect is identical — a strong local-admin secret that is never committed — only the mechanism
+is tool-idiomatic. Session hosts are Entra-joined, so this credential is rarely needed by learners.
+Set `deploySessionHosts = false` for an infrastructure-only / what-if run that needs no password on
+either track.
+
 ## Workflow (both tracks)
 
 1. **Guardrails first** — `scripts/setup/` (budget + auto-shutdown). Never deploy without them.
