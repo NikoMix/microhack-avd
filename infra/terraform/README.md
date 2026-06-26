@@ -20,10 +20,12 @@ A single, self-contained AVD landing zone in one resource group:
 - **Identity-ready host pool** — Pooled multi-session, Windows 11 Enterprise multi-session,
   Entra-joined, with Entra single sign-on RDP properties.
 - **Application group** (Desktop) + **workspace**, associated together.
-- **Session host(s)** — Entra-joined, with the AADLoginForWindows and AVD agent (DSC)
-  extensions; OS-disk type and count are lab-trimmed.
+- **Session host(s)** — Entra-joined, **Trusted Launch** (Secure Boot + vTPM), registered to
+  the host pool via the AADLoginForWindows and AVD agent (DSC) extensions; OS-disk type and
+  count are lab-trimmed. Deployment is toggleable (`deploySessionHosts`).
 - **FSLogix profile storage** — Azure Files Premium (`FileStorage`) share with Entra
-  Kerberos (`AADKERB`), a private endpoint, and a private DNS zone.
+  Kerberos (`AADKERB`), a private endpoint, and a private DNS zone; public network access and
+  shared-key (account-key) access are both disabled.
 - **Monitoring** — Log Analytics workspace with diagnostic settings wired from the host
   pool, workspace, NSG, virtual network, Key Vault, and storage account.
 - **Key Vault** — stores the break-glass local-admin password (RBAC authorization).
@@ -79,6 +81,7 @@ Same names, types, and lab defaults as the Bicep track. Override per environment
 | `environment` | string | `lab` | `lab` or `prod`; drives naming and sizing |
 | `namePrefix` | string | `avd` | Workload segment in resource names |
 | `sessionHostCount` | number | `1` | Number of session hosts (capped at 10) |
+| `deploySessionHosts` | bool | `true` | Deploy the session hosts, or just the control plane |
 | `sessionHostSize` | string | `Standard_D4as_v5` | Session host VM SKU |
 | `hostPoolType` | string | `Pooled` | `Pooled` or `Personal` |
 | `maxSessionLimit` | number | `8` | Max sessions per pooled host |
@@ -87,9 +90,17 @@ Same names, types, and lab defaults as the Bicep track. Override per environment
 | `adminObjectId` | string | `""` | Entra object ID granted desktop + Key Vault access |
 | `tags` | map(string) | `{}` | Extra tags merged onto every resource |
 
-Optional, fully-defaulted knobs (networking CIDRs, image reference, storage/disk SKUs,
-private endpoints, log retention, and the cost-guardrail values) are documented inline in
-[`variables.tf`](variables.tf). Leaving them unset keeps both tracks interchangeable.
+Optional, fully-defaulted extension knobs keep both tracks interchangeable; leaving them
+unset is fine. They are documented inline in [`variables.tf`](variables.tf) and include:
+
+- **Break-glass admin** — `sessionHostAdminUsername` (default `avdadmin`) and the **sensitive**
+  `sessionHostAdminPassword` (never defaulted/committed — supply via `TF_VAR_…` or leave empty
+  to auto-generate; see [Session-host admin password](#session-host-admin-password)).
+- **Networking** — `vnetAddressSpace`, `sessionHostSubnetPrefix`, `privateEndpointSubnetPrefix`.
+- **Monitoring** — `logAnalyticsRetentionDays`.
+- **Cost guardrails** — `budgetAmount`, `budgetContactEmails`, plus `budgetStartDate`,
+  `autoShutdownTime`, and `enableAutoShutdown`.
+- **Image / storage / disk SKUs** and private-endpoint and telemetry toggles.
 
 ## Outputs (cross-track contract)
 
@@ -150,6 +161,21 @@ hosts, autoscale on) for the High-Level / Low-Level Design. It still caps `sessi
 small so a curious `apply` cannot run up a bill — never scale it to Contoso's real fleet in
 the shared subscription.
 
+### Session-host admin password
+
+The break-glass local-admin password is a **sensitive** variable that is never defaulted or
+committed. Leave `sessionHostAdminPassword` empty to auto-generate a strong 24-character
+password (written to Key Vault), or supply your own through the environment so it never lands
+in a file:
+
+```bash
+export TF_VAR_sessionHostAdminPassword='<complex-password>'   # bash/zsh
+$env:TF_VAR_sessionHostAdminPassword = '<complex-password>'   # PowerShell
+terraform apply -var-file=lab.tfvars
+```
+
+Either way the effective password is stored in Key Vault under RBAC authorization.
+
 ### Provider lock file
 
 `.terraform.lock.hcl` **is committed** and carries provider checksums for `linux_amd64`,
@@ -182,9 +208,10 @@ without editing vendored module code.
 ## FSLogix profile storage
 
 Profiles live in **FSLogix containers on Azure Files Premium** with **Entra Kerberos**
-(`directory_type = "AADKERB"`), reached over a **private endpoint** with public network
-access disabled. This is the default for Entra-joined hosts up to ~1,000 users; move to Azure
-NetApp Files only beyond that or when latency demands it — see
+(`directory_type = "AADKERB"`), reached over a **private endpoint** with public network access
+and shared-key (account-key) access both disabled — Entra Kerberos is the only path in. This
+is the default for Entra-joined hosts up to ~1,000 users; move to Azure NetApp Files only
+beyond that or when latency demands it — see
 [`.github/skills/avd-fslogix`](../../.github/skills/avd-fslogix/SKILL.md). After `apply`, set
 the share-level RBAC (`Storage File Data SMB Share Contributor`) and NTFS ACLs as part of the
 configuration baseline.

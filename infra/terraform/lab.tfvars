@@ -15,10 +15,16 @@ environment = "lab"
 namePrefix  = "avd"
 
 # --- Session hosts: keep tiny -------------------------------------------------
-sessionHostCount = 1
-sessionHostSize  = "Standard_D2as_v5" # 2 vCPU / 8 GiB — smallest sensible AVD host
-hostPoolType     = "Pooled"
-maxSessionLimit  = 8
+deploySessionHosts = true # false = deploy the control plane only (no VMs)
+sessionHostCount   = 1
+sessionHostSize    = "Standard_D2as_v5" # 2 vCPU / 8 GiB — smallest sensible AVD host
+hostPoolType       = "Pooled"
+maxSessionLimit    = 8
+
+# Break-glass local admin. The password is SENSITIVE — leave it unset to auto-generate
+# a strong password (stored in Key Vault), or supply your own WITHOUT committing it:
+#   $env:TF_VAR_sessionHostAdminPassword = "<complex-password>"   # PowerShell
+sessionHostAdminUsername = "avdadmin"
 
 # --- FSLogix profile storage (cost-trimmed for lab) ---------------------------
 profileStorageQuotaGb = 128

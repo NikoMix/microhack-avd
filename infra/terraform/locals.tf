@@ -70,6 +70,13 @@ locals {
   personal_assignment     = local.is_pooled ? null : "Automatic"
   deploy_private_endpoint = var.enablePrivateEndpoints
 
+  # deploySessionHosts gates the VM count; 0 = control plane only (no session hosts).
+  session_host_count = var.deploySessionHosts ? var.sessionHostCount : 0
+
+  # Break-glass admin password: caller-supplied sensitive var, or auto-generated when
+  # left empty. Never defaulted/committed — empty input falls back to random_password.
+  admin_password = var.sessionHostAdminPassword != "" ? var.sessionHostAdminPassword : random_password.vm.result
+
   # Standard AVM diagnostic-settings block pointing at the workspace ("allLogs"
   # + "AllMetrics"). Reused across the host pool, workspace, NSG, and Key Vault.
   diagnostics_to_law = {

@@ -50,6 +50,12 @@ variable "sessionHostCount" {
   }
 }
 
+variable "deploySessionHosts" {
+  type        = bool
+  default     = true
+  description = "Toggle session-host deployment. true = deploy sessionHostCount hosts; false = stand up the control plane (host pool, app group, workspace, storage) only, with no VMs. Lets you build the landing zone first, then add hosts."
+}
+
 variable "sessionHostSize" {
   type        = string
   default     = "Standard_D4as_v5"
@@ -122,14 +128,26 @@ variable "owner" {
   description = "Value for the mandatory 'owner' tag."
 }
 
-variable "localAdminUsername" {
+variable "sessionHostAdminUsername" {
   type        = string
   default     = "avdadmin"
   description = "Break-glass local administrator username for the session hosts. Hosts are Entra-joined; this account is for emergency access only and its password is stored in Key Vault."
 
   validation {
-    condition     = can(regex("^[a-zA-Z][a-zA-Z0-9-]{1,19}$", var.localAdminUsername)) && !contains(["admin", "administrator", "guest", "root"], lower(var.localAdminUsername))
-    error_message = "localAdminUsername must be 2-20 chars, start with a letter, and not be a reserved name (admin/administrator/guest/root)."
+    condition     = can(regex("^[a-zA-Z][a-zA-Z0-9-]{1,19}$", var.sessionHostAdminUsername)) && !contains(["admin", "administrator", "guest", "root"], lower(var.sessionHostAdminUsername))
+    error_message = "sessionHostAdminUsername must be 2-20 chars, start with a letter, and not be a reserved name (admin/administrator/guest/root)."
+  }
+}
+
+variable "sessionHostAdminPassword" {
+  type        = string
+  default     = ""
+  sensitive   = true
+  description = "Break-glass local administrator password for the session hosts. SENSITIVE — supply via the TF_VAR_sessionHostAdminPassword environment variable or -var on the CLI; never default or commit it. Leave empty to auto-generate a strong 24-char password (stored in Key Vault)."
+
+  validation {
+    condition     = var.sessionHostAdminPassword == "" || (length(var.sessionHostAdminPassword) >= 12 && length(var.sessionHostAdminPassword) <= 123)
+    error_message = "sessionHostAdminPassword must be empty (auto-generate) or 12-123 characters to satisfy Windows complexity requirements."
   }
 }
 
@@ -156,14 +174,14 @@ variable "vnetAddressSpace" {
   }
 }
 
-variable "avdSubnetPrefix" {
+variable "sessionHostSubnetPrefix" {
   type        = string
   default     = "10.20.0.0/24"
   description = "CIDR for the session-host subnet."
 
   validation {
-    condition     = can(cidrhost(var.avdSubnetPrefix, 0))
-    error_message = "avdSubnetPrefix must be a valid CIDR block."
+    condition     = can(cidrhost(var.sessionHostSubnetPrefix, 0))
+    error_message = "sessionHostSubnetPrefix must be a valid CIDR block."
   }
 }
 
@@ -242,14 +260,14 @@ variable "timeZone" {
   description = "Windows time-zone name for the autoscale scaling plan schedule."
 }
 
-variable "logRetentionDays" {
+variable "logAnalyticsRetentionDays" {
   type        = number
   default     = 30
   description = "Retention (days) for the Log Analytics workspace."
 
   validation {
-    condition     = var.logRetentionDays >= 30 && var.logRetentionDays <= 730
-    error_message = "logRetentionDays must be between 30 and 730."
+    condition     = var.logAnalyticsRetentionDays >= 30 && var.logAnalyticsRetentionDays <= 730
+    error_message = "logAnalyticsRetentionDays must be between 30 and 730."
   }
 }
 
