@@ -1,0 +1,85 @@
+---
+title: AVD Module B MicroHack
+description: The Agentic Engagement — a Train-the-Trainer MicroHack that delivers every Azure Virtual Desktop Advanced Specialization Module B control with GitHub Copilot agents, skills, and MCP servers.
+template: splash
+hero:
+  tagline: Deliver every AVD Advanced Specialization Module B control with GitHub Copilot custom agents, skills, and MCP servers — end-to-end, on real Azure, with Bicep and Terraform.
+  image:
+    html: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" width="240" height="180" role="img" aria-label="AVD agentic engagement"><rect x="40" y="28" width="160" height="104" rx="12" fill="#0078D4"/><rect x="56" y="44" width="128" height="72" rx="6" fill="#0b1220"/><path d="M120 56l7 17 17 7-17 7-7 17-7-17-17-7 17-7z" fill="#5C2D91"/><circle cx="120" cy="80" r="3" fill="#9bd1ff"/><rect x="96" y="140" width="48" height="10" rx="5" fill="#0078D4"/><path d="M112 132h16l3 8h-22z" fill="#0078D4"/><circle cx="38" cy="40" r="6" fill="#5C2D91"/><circle cx="202" cy="120" r="6" fill="#0078D4"/></svg>'
+  actions:
+    - text: View the repo on GitHub
+      link: https://github.com/NikoMix/microhack-avd
+      icon: external
+      variant: primary
+---
+
+import { Card, CardGrid, LinkCard, LinkButton, Aside, Steps } from '@astrojs/starlight/components';
+
+export const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
+
+<LinkButton href={base + 'challenges/'} icon="right-arrow">Start the challenges</LinkButton>
+<LinkButton href={base + 'scenario/'} variant="secondary">Meet Contoso</LinkButton>
+<LinkButton href={base + 'toolkit/'} variant="minimal" icon="open-book">The agentic toolkit</LinkButton>
+
+## What you build today
+
+A single fictitious customer — **Contoso** — is migrating **~1,000 RDS/Citrix users** (knowledge
+workers, a call centre, power users, and developers) to **Azure Virtual Desktop**. Across **eight
+challenges** you take Contoso from **discovery → design → review → pilot → production → validation
+→ handover**, exactly mirroring **Module B**, while a fleet of purpose-built **Copilot agents** and
+**MCP servers** do the heavy lifting.
+
+<Aside type="tip" title="Do it the agentic way">
+  Every challenge leads with "ask the `avd-…` agent / use the `…` skill / query the `…` MCP", then
+  shows the manual fallback. That contrast is the lesson.
+</Aside>
+
+## Explore the course
+
+<CardGrid>
+  <LinkCard title="Scenario — Contoso" href={base + 'scenario/'} description="The four personas, the legacy estate, and the data that drives every artifact." />
+  <LinkCard title="The agentic toolkit" href={base + 'toolkit/'} description="Eight Copilot agents, seven skills, and four MCP servers." />
+  <LinkCard title="Challenges (00–07)" href={base + 'challenges/'} description="The control → agent → evidence map for the whole engagement." />
+  <LinkCard title="Infrastructure tracks" href={base + 'infra/'} description="One AVD landing zone, two AVM tracks: Bicep and Terraform." />
+  <LinkCard title="Facilitator kit" href={base + 'facilitator/'} description="Train-the-Trainer run-of-day, checklists, and answer keys." />
+  <LinkCard title="Source on GitHub" href="https://github.com/NikoMix/microhack-avd" description="Agents, skills, MCP config, IaC, scripts, and scenario data." />
+</CardGrid>
+
+## The engagement at a glance
+
+| # | Challenge | Control | Lead agent | Evidence |
+|---|---|---|---|---|
+| 00 | Setup & guardrails | — | `avd-engagement-lead` | Working env + cost cap |
+| 01 | Workload assessment | **B.1.1** | `avd-assessor` | `assessment.md` |
+| 02 | Solution design (HLD) | **B.2.1** | `avd-architect` | `hld.md` |
+| 03 | Well-Architected review | **B.2.2** | `avd-waf-reviewer` | `waf-review.md` |
+| 04 | PoC / Pilot | **B.2.3** | `avd-pilot-lead` | `pilot.md` |
+| 05 | Deploy to production | **B.3.1** | `avd-deployment-engineer` | `deployment.md` |
+| 06 | Service validation | **B.4.1** | `avd-test-engineer` | `validation.md` |
+| 07 | Handover documentation | **B.4.2** | `avd-handover-writer` | LLD + runbook + KT + sign-off |
+
+## Quick start (learners)
+
+<Steps>
+
+1. **Open in Codespaces** — everything (`az`, `azd`, `bicep`, `terraform`, `gh`, Copilot CLI,
+   `node`, `pwsh`, `python`) is pre-installed.
+
+2. Set your `GH_TOKEN`, then `az login` to **your own** Azure subscription.
+
+3. Start at **Challenge 00 · Setup & guardrails** and work the index above.
+
+</Steps>
+
+<Aside type="caution" title="Cost matters">
+  Challenge 00 deploys a **budget + auto-shutdown** and uses small, teardownable SKUs. Run
+  `scripts/reset/` at the end of the day — every challenge reminds you. The full 1,000-user
+  footprint stays a **paper design**.
+</Aside>
+
+<Aside type="note" title="Aligned to the specialization">
+  Derived from, and aligned to, the
+  [AVD Advanced Specialization toolkit](https://github.com/NikoMix/specialization-avd) — it teaches
+  the consulting engagement lifecycle the auditor inspects, accelerated with AI tooling. Every
+  challenge produces a real **audit evidence artifact**.
+</Aside>

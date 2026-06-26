@@ -1,0 +1,63 @@
+---
+title: 05 · Deploy to production
+description: Module B control B.3.1 — deploy the AVD landing zone with the AVM Bicep or Terraform track, capture a Go-Live record, and produce a cutover + rollback plan.
+---
+
+import { Card, CardGrid, LinkCard, Aside, Steps } from '@astrojs/starlight/components';
+
+export const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
+
+| | |
+|---|---|
+| **Module B control** | **B.3.1** Deploy to Production |
+| **Time-box** | 75 min |
+| **Lead agent** | `avd-deployment-engineer` |
+| **Evidence** | `deployment.md` |
+
+## Objective
+
+Deploy the AVD landing zone from the **AVM-based Bicep or Terraform** track in `infra/` — preview,
+deploy the **lab footprint**, apply the configuration baseline, capture a **Go-Live record**, and
+produce a **cutover + rollback** plan for the RDS/Citrix migration.
+
+## The agentic way (do this first)
+
+- **Agent:** `avd-deployment-engineer` (cost-aware).
+- **Skills:** `avd-landing-zone`, `avd-cost-guardrails`, `avd-migration-cutover`.
+- **MCP:** `azure` for `what-if`/deploy/quota; `terraform` for module/provider lookup.
+
+## Workflow
+
+<Steps>
+
+1. **Guardrails first** — confirm the budget + auto-shutdown from `scripts/setup/` are in place.
+2. **Preview** — `az deployment sub what-if` (Bicep) or `terraform plan` (Terraform). Read it.
+3. **Deploy** the lab slice (1–2 session hosts, small SKUs).
+4. **Verify** outputs resolve, tags are present, and the config baseline is applied.
+5. **Record** Go-Live and the cutover + rollback plan — then point at `scripts/reset/`.
+
+</Steps>
+
+## Definition of done
+
+- Guardrails confirmed **before** any session host exists.
+- The **what-if / plan** was reviewed and is captured in the evidence.
+- Deployment succeeds; the [contract outputs](https://github.com/NikoMix/microhack-avd/blob/main/infra/README.md)
+  resolve and tags are present.
+- A **Go-Live record** and a **cutover + rollback** plan exist.
+- Teardown via `scripts/reset/` is documented (and run at the end of the day).
+
+<Aside type="caution" title="Tiny footprint, paper scale">
+  Deploy a **token slice**, never Contoso's full ~1,000-user footprint. Preview before every apply.
+</Aside>
+
+<LinkCard
+  title="Open the full challenge in the repo"
+  href="https://github.com/NikoMix/microhack-avd/tree/main/challenges/challenge-05-deploy-to-production"
+  description="Step-by-step instructions for the Bicep and Terraform tracks."
+/>
+
+<CardGrid>
+  <LinkCard title="← 04 PoC / Pilot" href={base + 'challenges/04-poc-pilot/'} />
+  <LinkCard title="Next · 06 Service validation →" href={base + 'challenges/06-service-validation/'} />
+</CardGrid>

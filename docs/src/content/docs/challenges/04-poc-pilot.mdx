@@ -1,0 +1,56 @@
+---
+title: 04 · PoC / Pilot
+description: Module B control B.2.3 — design and evaluate the AVD pilot with quantitative success criteria and a defensible go/no-go that de-risks the production rollout.
+---
+
+import { Card, CardGrid, LinkCard, Aside } from '@astrojs/starlight/components';
+
+export const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
+
+| | |
+|---|---|
+| **Module B control** | **B.2.3** PoC / Pilot |
+| **Time-box** | 45 min |
+| **Lead agent** | `avd-pilot-lead` |
+| **Evidence** | `pilot.md` |
+
+## Objective
+
+Design and evaluate the AVD **Proof-of-Concept / Pilot**: **scope** (in/out), **quantitative
+success criteria**, a **test plan**, **results capture**, and a **go/no-go** recommendation that
+de-risks the production rollout.
+
+## The agentic way (do this first)
+
+- **Agent:** `avd-pilot-lead`.
+- **Skills:** `avd-evidence-pack` (the `pilot.md` template), `avd-personas-sizing` (set realistic
+  density/perf targets).
+- **MCP:** `azure` to observe the pilot environment; `github` to track scope and results.
+
+## Evidence artifact
+
+`pilot.md` — scope in/out, measurable success criteria, the test plan, results captured against
+the criteria, and a go/no-go recommendation.
+
+## Definition of done
+
+- **Scope** is explicit: which personas, apps, and regions are **in** and **out**.
+- Success criteria are **quantitative** (e.g. logon time, app-launch time, density, profile load).
+- A **test plan** maps each criterion to a repeatable test.
+- Results are captured **against** the criteria, and a clear **go/no-go** is recommended.
+
+<Aside type="caution" title="Criteria before tests">
+  Agree the numeric thresholds with the customer **before** you test, or the pilot becomes an
+  opinion. The thresholds carry straight into Challenge 06.
+</Aside>
+
+<LinkCard
+  title="Open the full challenge in the repo"
+  href="https://github.com/NikoMix/microhack-avd/tree/main/challenges/challenge-04-poc-pilot"
+  description="Step-by-step instructions, prerequisites, and trainer notes."
+/>
+
+<CardGrid>
+  <LinkCard title="← 03 Well-Architected review" href={base + 'challenges/03-well-architected-review/'} />
+  <LinkCard title="Next · 05 Deploy to production →" href={base + 'challenges/05-deploy-to-production/'} />
+</CardGrid>

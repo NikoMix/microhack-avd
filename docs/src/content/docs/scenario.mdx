@@ -1,0 +1,63 @@
+---
+title: Scenario — Contoso
+description: The fictitious Contoso customer driving the AVD Module B MicroHack — ~1,000 RDS/Citrix users across four personas migrating to Azure Virtual Desktop.
+---
+
+import { Card, CardGrid, LinkCard, Aside, Badge } from '@astrojs/starlight/components';
+
+export const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
+
+**Contoso Ltd.** runs **~1,000 users** on an ageing on-premises VDI estate — a mix of
+**Microsoft RDS** and **Citrix Virtual Apps & Desktops** across two datacentres. Hardware
+refresh is due, the Citrix licensing renewal is looming, and remote-work demand has outgrown
+the gateway. Contoso wants to **migrate to Azure Virtual Desktop** to cut cost, simplify
+operations, and improve the remote experience — **without a big-bang cutover**.
+
+<Aside type="note" title="One source of truth">
+  All scenario numbers are **fictitious** and live in
+  [`scenario/`](https://github.com/NikoMix/microhack-avd/tree/main/scenario). Use these figures
+  everywhere; do not invent different ones unless a challenge explicitly asks for a variation.
+</Aside>
+
+## The four personas
+
+| Persona | Profile | Users | Topology |
+|---|---|---|---|
+| Knowledge workers | Pooled multi-session | **700** | Win 11 Enterprise multi-session |
+| Call centre | Pooled multi-session, time-based scaling | **200** | High density, predictable hours |
+| Power users | Personal | **60** | Persistent, heavier apps |
+| Developers | Personal | **40** | Custom installs, premium disk |
+| **Total** | | **1000** | |
+
+The split — **700 + 200 + 60 + 40 = 1,000** — must reconcile in every artifact you produce.
+
+<Aside type="caution" title="Paper design vs. lab slice">
+  The full 1,000-user footprint is a **paper design**. In the lab you deploy a **token slice**
+  (1–2 session hosts, small SKUs). Guardrails and teardown live in
+  [`scripts/`](https://github.com/NikoMix/microhack-avd/tree/main/scripts) and the
+  `avd-cost-guardrails` skill.
+</Aside>
+
+## Scenario data files
+
+| File | What it is | Used by |
+|---|---|---|
+| [`current-state.md`](https://github.com/NikoMix/microhack-avd/blob/main/scenario/current-state.md) | Narrative of the legacy RDS/Citrix estate, identity, network, pain points | C01 (B.1.1) |
+| [`personas.csv`](https://github.com/NikoMix/microhack-avd/blob/main/scenario/personas.csv) | The four user personas with counts, patterns, app sets | C01, C02 |
+| [`app-inventory.csv`](https://github.com/NikoMix/microhack-avd/blob/main/scenario/app-inventory.csv) | Application estate + current delivery + migration notes | C01 |
+| [`map-assessment-sample.csv`](https://github.com/NikoMix/microhack-avd/blob/main/scenario/map-assessment-sample.csv) | Sample MAP Toolkit / Azure Migrate / Citrix Director discovery output | C01 |
+
+## Where this goes next
+
+<CardGrid>
+  <LinkCard
+    title="The agentic toolkit"
+    href={base + 'toolkit/'}
+    description="The Copilot agents, skills, and MCP servers that do the heavy lifting."
+  />
+  <LinkCard
+    title="Start the challenges"
+    href={base + 'challenges/'}
+    description="Eight challenges take Contoso from discovery to handover."
+  />
+</CardGrid>

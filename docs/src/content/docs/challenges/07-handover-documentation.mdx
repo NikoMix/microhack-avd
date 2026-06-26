@@ -1,0 +1,56 @@
+---
+title: 07 · Handover documentation
+description: Module B control B.4.2 — assemble the AVD operational handover pack — LLD, runbook, knowledge-transfer plan, hypercare plan, customer sign-off, and lessons learned.
+---
+
+import { Card, CardGrid, LinkCard, Aside } from '@astrojs/starlight/components';
+
+export const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
+
+| | |
+|---|---|
+| **Module B control** | **B.4.2** Handover Docs |
+| **Time-box** | 45 min |
+| **Lead agent** | `avd-handover-writer` |
+| **Evidence** | LLD + runbook + KT plan + hypercare + sign-off + lessons learned |
+
+## Objective
+
+Assemble the AVD **operational handover** — a **Low-Level Design** (as-built), an **operations
+runbook**, a **knowledge-transfer plan**, a **hypercare plan**, a **customer sign-off**, and
+**lessons learned** — turning the engagement's evidence into a coherent pack the customer's team
+can run.
+
+## The agentic way (do this first)
+
+- **Agent:** `avd-handover-writer`.
+- **Skills:** `avd-evidence-pack` (handover templates), `avd-landing-zone`, `avd-fslogix`.
+- **MCP:** `azure` to confirm the **as-built** state; `github` to assemble the artifacts.
+
+## Evidence artifacts
+
+A **Low-Level Design**, an **operations runbook**, a **KT plan**, a **hypercare plan**, a
+**customer sign-off**, and a **lessons-learned** record.
+
+## Definition of done
+
+- The **LLD reflects what was actually deployed** (as-built, reconciled with C05/C06).
+- The **runbook** covers common ops tasks (scaling, image updates, profile issues, onboarding).
+- A **KT plan** and a **hypercare plan** (with exit criteria) are in place.
+- A **customer sign-off** records acceptance; **lessons learned** are captured for next time.
+
+<Aside type="note" title="Close the loop">
+  The handover is where the engagement becomes auditable as a whole — every prior artifact should
+  be referenced and reconciled here.
+</Aside>
+
+<LinkCard
+  title="Open the full challenge in the repo"
+  href="https://github.com/NikoMix/microhack-avd/tree/main/challenges/challenge-07-handover-documentation"
+  description="Step-by-step instructions, prerequisites, and trainer notes."
+/>
+
+<CardGrid>
+  <LinkCard title="← 06 Service validation" href={base + 'challenges/06-service-validation/'} />
+  <LinkCard title="All challenges" href={base + 'challenges/'} />
+</CardGrid>

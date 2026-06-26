@@ -1,0 +1,84 @@
+---
+title: Challenges (00–07)
+description: Eight challenges take Contoso through a complete AVD Advanced Specialization Module B engagement — discovery, design, review, pilot, production, validation, and handover.
+---
+
+import { Card, CardGrid, LinkCard, Aside, Steps } from '@astrojs/starlight/components';
+
+export const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
+
+Eight challenges take you through a complete **AVD Advanced Specialization Module B** engagement
+for **Contoso**, using GitHub Copilot **agents, skills, and MCP servers** at every step. Each
+challenge maps to a Module B control and produces the **evidence artifact** an auditor expects.
+
+<Aside type="note" title="New here?">
+  Read the **Overview** and **Scenario — Contoso** pages first (in the sidebar), then start at
+  **Challenge 00**. Challenge prose lives in
+  [`challenges/`](https://github.com/NikoMix/microhack-avd/tree/main/challenges) — this site links
+  to each directory so you always get the latest.
+</Aside>
+
+## Control → agent → evidence
+
+| # | Challenge | Control | Time-box | Lead agent | Evidence artifact |
+|---|---|---|---|---|---|
+| 00 | Setup & guardrails | — | 45 min | `avd-engagement-lead` | Working env + cost cap |
+| 01 | Workload assessment | **B.1.1** | 60 min | `avd-assessor` | `assessment.md` |
+| 02 | Solution design (HLD) | **B.2.1** | 60 min | `avd-architect` | `hld.md` |
+| 03 | Well-Architected review | **B.2.2** | 45 min | `avd-waf-reviewer` | `waf-review.md` |
+| 04 | PoC / Pilot | **B.2.3** | 45 min | `avd-pilot-lead` | `pilot.md` |
+| 05 | Deploy to production | **B.3.1** | 75 min | `avd-deployment-engineer` | `deployment.md` |
+| 06 | Service validation | **B.4.1** | 45 min | `avd-test-engineer` | `validation.md` |
+| 07 | Handover documentation | **B.4.2** | 45 min | `avd-handover-writer` | LLD + runbook + KT + sign-off |
+
+_Total ≈ 7.5 h including breaks. See the **Facilitator kit** (in the sidebar) for the
+minute-by-minute timetable._
+
+## What each control must yield
+
+| Control | Evidence the auditor expects |
+|---|---|
+| **B.1.1** Workload Assessment | Personas, app inventory + delivery decisions, image strategy, sizing/density, MAP/Azure Migrate |
+| **B.2.1** Solution Design | High-Level Design (topology, identity, FSLogix, network, image, scaling, BCDR) |
+| **B.2.2** Well-Architected Review | Cost / Performance / Reliability findings + decision register (AVD lens) |
+| **B.2.3** PoC / Pilot | Scope, quantitative success criteria, results, go/no-go |
+| **B.3.1** Deploy to Production | IaC pipeline run, config baseline, Go-Live record, cutover + rollback |
+| **B.4.1** Service Validation | Logon perf, app launch, scaling, failover, FSLogix integrity test results |
+| **B.4.2** Handover Docs | LLD, runbook, KT plan, hypercare plan, sign-off, lessons learned |
+
+## How each challenge works
+
+<Steps>
+
+1. **Adopt the lead agent** (`avd-engagement-lead`) to orchestrate, or jump straight to the
+   challenge's specialist agent.
+
+2. **Do it the agentic way** — every challenge shows which **agent / skill / MCP** to use first,
+   then a manual fallback.
+
+3. **Produce the evidence** — copy the matching template from the `avd-evidence-pack` skill into
+   the challenge's `work/` folder and fill it in.
+
+4. **Pass the gate** — check your artifact against the **Definition of done** before moving on.
+
+</Steps>
+
+<Aside type="tip" title="Tracks">
+  **IaC:** Challenges 05–06 run on either the **Bicep** or **Terraform** track — both deploy the
+  same [landing zone](https://github.com/NikoMix/microhack-avd/tree/main/infra). **Footprint:**
+  live deploys use a tiny lab slice (1–2 session hosts); Contoso's full ~1,000-user design stays
+  on paper.
+</Aside>
+
+## Jump to a challenge
+
+<CardGrid>
+  <LinkCard title="00 · Setup & guardrails" href={base + 'challenges/00-setup/'} description="Foundation — working env + deployed cost cap." />
+  <LinkCard title="01 · Workload assessment · B.1.1" href={base + 'challenges/01-workload-assessment/'} description="Personas, app inventory, image strategy, sizing." />
+  <LinkCard title="02 · Solution design (HLD) · B.2.1" href={base + 'challenges/02-solution-design/'} description="The signed-off High-Level Design." />
+  <LinkCard title="03 · Well-Architected review · B.2.2" href={base + 'challenges/03-well-architected-review/'} description="Cost / Performance / Reliability register." />
+  <LinkCard title="04 · PoC / Pilot · B.2.3" href={base + 'challenges/04-poc-pilot/'} description="Scope, success criteria, go/no-go." />
+  <LinkCard title="05 · Deploy to production · B.3.1" href={base + 'challenges/05-deploy-to-production/'} description="Live AVD via Bicep/Terraform AVM + Go-Live." />
+  <LinkCard title="06 · Service validation · B.4.1" href={base + 'challenges/06-service-validation/'} description="Logon, scaling, failover, FSLogix tests." />
+  <LinkCard title="07 · Handover documentation · B.4.2" href={base + 'challenges/07-handover-documentation/'} description="LLD, runbook, hypercare, lessons learned." />
+</CardGrid>

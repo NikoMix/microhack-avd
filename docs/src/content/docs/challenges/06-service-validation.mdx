@@ -1,0 +1,57 @@
+---
+title: 06 · Service validation
+description: Module B control B.4.1 — validate the deployed AVD environment against the pilot success criteria, capturing evidence for logon, app launch, scaling, failover, and FSLogix.
+---
+
+import { Card, CardGrid, LinkCard, Aside } from '@astrojs/starlight/components';
+
+export const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
+
+| | |
+|---|---|
+| **Module B control** | **B.4.1** Service Validation |
+| **Time-box** | 45 min |
+| **Lead agent** | `avd-test-engineer` |
+| **Evidence** | `validation.md` |
+
+## Objective
+
+Validate the **deployed** AVD environment against the pilot's success criteria: **logon
+performance**, **application launch**, **autoscaling behaviour**, **failover/resilience**, and
+**FSLogix profile integrity** — capturing **pass/fail evidence**, not assertions.
+
+## The agentic way (do this first)
+
+- **Agent:** `avd-test-engineer`.
+- **Skills:** `avd-fslogix` (profile integrity checks), `avd-personas-sizing` (expected density).
+- **MCP:** `azure` (Monitor / AVD Insights / KQL) for measured results; `microsoft-learn` for the
+  validation method.
+
+## Evidence artifact
+
+`validation.md` — measured results for logon, app launch, scaling, and failover, plus an FSLogix
+profile round-trip, each marked **pass/fail** against the Challenge 04 criteria.
+
+## Definition of done
+
+- **Logon time** and **app-launch time** measured and compared to the pilot thresholds.
+- **Autoscaling** behaviour observed (scale-out and scale-in) against the schedule.
+- **Failover / resilience** exercised and the result recorded.
+- **FSLogix** profile **round-trip** verified (sign in, persist, sign out, sign back in).
+- Every result is **evidence** (numbers, screenshots, KQL) — not an assertion.
+
+<Aside type="tip" title="Evidence, not assertion">
+  "Logon averaged 18 s across 10 sign-ins (target ≤ 30 s) — PASS" is evidence. "Logon is fast"
+  is not.
+</Aside>
+
+<LinkCard
+  title="Open the full challenge in the repo"
+  href="https://github.com/NikoMix/microhack-avd/tree/main/challenges/challenge-06-service-validation"
+  description="Step-by-step instructions, prerequisites, and trainer notes."
+/>
+
+<CardGrid>
+  <LinkCard title="← 05 Deploy to production" href={base + 'challenges/05-deploy-to-production/'} />
+  <LinkCard title="Next · 07 Handover documentation →" href={base + 'challenges/07-handover-documentation/'} />
+</CardGrid>

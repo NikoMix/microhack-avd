@@ -1,0 +1,17 @@
+/* AVD MicroHack — Azure-blue / specialization-purple accent over Starlight defaults. */
+:root {
+  --sl-color-accent-low: #002a4d;
+  --sl-color-accent: #0078d4;
+  --sl-color-accent-high: #bfe1fb;
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent-low: #cfe6fa;
+  --sl-color-accent: #0067b8;
+  --sl-color-accent-high: #003a66;
+}
+
+/* Slightly tighten hero tagline width for readability on the splash page. */
+.hero > .copy {
+  max-width: 48ch;
+}

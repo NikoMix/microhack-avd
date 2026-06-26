@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="AVD MicroHack">
+  <rect x="12" y="20" width="104" height="70" rx="9" fill="#0078D4"/>
+  <rect x="24" y="32" width="80" height="46" rx="4" fill="#ffffff" opacity="0.96"/>
+  <rect x="44" y="100" width="40" height="8" rx="4" fill="#0078D4"/>
+  <path d="M58 90h12l3 10H55z" fill="#0078D4"/>
+  <path d="M64 38l4.5 11L80 53l-11.5 4L64 68l-4.5-11L48 53l11.5-4z" fill="#5C2D91"/>
+</svg>
