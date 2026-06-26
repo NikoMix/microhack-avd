@@ -1,0 +1,248 @@
+/* @theme microhack */
+
+/*
+ * AVD Module B MicroHack — brand-neutral Marp theme.
+ * OSS / license-free: system font stack only (no licensed fonts or imagery).
+ * Extends Marp's bundled "default" theme, then overrides typography and layout.
+ */
+
+@import 'default';
+
+:root {
+  --mh-ink: #1b1f24;
+  --mh-muted: #57606a;
+  --mh-bg: #ffffff;
+  --mh-panel: #f6f8fa;
+  --mh-border: #d0d7de;
+  --mh-accent: #2f6feb;      /* calm, brand-neutral blue */
+  --mh-accent-2: #0e7c66;    /* teal, used sparingly */
+  --mh-warn: #9a6700;
+  --mh-code-bg: #f6f8fa;
+  --mh-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --mh-mono: ui-monospace, SFMono-Regular, "Cascadia Code", "Consolas", "Liberation Mono",
+    monospace;
+}
+
+section {
+  font-family: var(--mh-font);
+  font-size: 24px;
+  line-height: 1.45;
+  color: var(--mh-ink);
+  background: var(--mh-bg);
+  padding: 56px 64px;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--mh-ink);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+h1 {
+  font-size: 1.7em;
+  border-bottom: 3px solid var(--mh-accent);
+  padding-bottom: 0.2em;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-size: 1.28em;
+  padding-left: 0.5em;
+  border-left: 6px solid var(--mh-accent);
+  margin-bottom: 0.6em;
+}
+
+h3 {
+  font-size: 1.05em;
+  color: var(--mh-muted);
+}
+
+strong {
+  color: var(--mh-ink);
+  font-weight: 700;
+}
+
+a {
+  color: var(--mh-accent);
+  text-decoration: none;
+}
+
+ul,
+ol {
+  margin: 0.2em 0 0.2em 0;
+}
+
+li {
+  margin: 0.2em 0;
+}
+
+code {
+  font-family: var(--mh-mono);
+  font-size: 0.86em;
+  background: var(--mh-code-bg);
+  border: 1px solid var(--mh-border);
+  border-radius: 6px;
+  padding: 0.06em 0.35em;
+}
+
+pre {
+  background: var(--mh-code-bg);
+  border: 1px solid var(--mh-border);
+  border-radius: 10px;
+  padding: 0.8em 1em;
+  font-size: 0.8em;
+}
+
+pre code {
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
+blockquote {
+  border-left: 6px solid var(--mh-accent-2);
+  background: var(--mh-panel);
+  color: var(--mh-ink);
+  margin: 0.5em 0;
+  padding: 0.5em 1em;
+  border-radius: 0 10px 10px 0;
+}
+
+blockquote::before {
+  content: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82em;
+}
+
+th,
+td {
+  border: 1px solid var(--mh-border);
+  padding: 0.4em 0.6em;
+  text-align: left;
+  vertical-align: top;
+}
+
+thead th {
+  background: var(--mh-panel);
+  font-weight: 700;
+}
+
+tbody tr:nth-child(even) {
+  background: #fbfcfd;
+}
+
+/* Two-column utility: <div class="columns"> ... </div> */
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2em;
+  align-items: start;
+}
+
+/* Small print for footnotes / sources */
+.small {
+  font-size: 0.78em;
+  color: var(--mh-muted);
+}
+
+/* Header / footer / pagination */
+header {
+  color: var(--mh-muted);
+  font-size: 0.6em;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+footer {
+  color: var(--mh-muted);
+  font-size: 0.62em;
+}
+
+section::after {
+  color: var(--mh-muted);
+  font-size: 0.62em;
+}
+
+/* ---- Lead / title & section divider slides: <!-- _class: lead --> ---- */
+section.lead {
+  justify-content: center;
+  text-align: center;
+  background:
+    radial-gradient(120% 120% at 50% 0%, #eef3ff 0%, #ffffff 55%);
+}
+
+section.lead h1 {
+  font-size: 2.1em;
+  border-bottom: 0;
+  margin-bottom: 0.2em;
+}
+
+section.lead h2 {
+  border-left: 0;
+  padding-left: 0;
+  color: var(--mh-accent);
+  font-weight: 600;
+}
+
+section.lead blockquote {
+  display: inline-block;
+  text-align: left;
+}
+
+/* ---- Close / final slide: <!-- _class: lead close --> large closing heading ---- */
+section.close h2 {
+  font-size: 2.1em;
+  border-left: 0;
+  padding-left: 0;
+  color: var(--mh-ink);
+  font-weight: 700;
+  margin-bottom: 0.2em;
+}
+
+section.close h3 {
+  color: var(--mh-accent);
+  font-weight: 600;
+}
+
+/* ---- Gate slide: <!-- _class: gate --> highlights a go/no-go checkpoint ---- */
+section.gate {
+  background: linear-gradient(0deg, #fff8e6 0%, #ffffff 70%);
+}
+
+section.gate h2 {
+  border-left-color: var(--mh-warn);
+  color: var(--mh-warn);
+}
+
+/* ---- Invert (dark) divider: <!-- _class: invert --> ---- */
+section.invert {
+  background: #0d1117;
+  color: #e6edf3;
+}
+
+section.invert h1,
+section.invert h2,
+section.invert h3,
+section.invert strong {
+  color: #e6edf3;
+}
+
+section.invert h1 {
+  border-bottom-color: var(--mh-accent);
+}
+
+section.invert h2 {
+  border-left-color: var(--mh-accent);
+}
+
+section.invert a {
+  color: #79a8ff;
+}

@@ -1,0 +1,21 @@
+{
+  "name": "avd-microhack-slides",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "description": "OSS Marp slide decks for the AVD Module B (Advanced Specialization) Train-the-Trainer MicroHack.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node build.mjs html",
+    "build:pdf": "node build.mjs pdf",
+    "build:pptx": "node build.mjs pptx",
+    "watch": "marp --theme-set ./themes --html --server .",
+    "preview": "marp --theme-set ./themes --html --preview ./00-welcome.md"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "4.4.0"
+  }
+}
