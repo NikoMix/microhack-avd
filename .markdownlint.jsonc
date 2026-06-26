@@ -1,0 +1,12 @@
+{
+  // Markdownlint config for the MicroHack content.
+  // Docs: https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+  "default": true,
+  "MD013": false, // line length — prose and tables run long by design
+  "MD024": { "siblings_only": true }, // repeated headings allowed across sections
+  "MD033": false, // inline HTML used for badges/callouts
+  "MD041": false, // first line need not be a top-level heading (front matter / HTML)
+  "MD046": false, // allow both fenced and indented code in challenge steps
+  "MD060": false, // table-pipe padding — GFM compact tables (|---|) are intentional
+  "MD029": { "style": "ordered" }
+}

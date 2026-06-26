@@ -1,0 +1,46 @@
+name: 🧩 Challenge feedback
+description: Something in a challenge was confusing, broken, or could be better (great for trainers).
+title: "[C0X] "
+labels: ["challenge-feedback"]
+body:
+  - type: dropdown
+    id: challenge
+    attributes:
+      label: Which challenge?
+      options:
+        - "00 — Setup & guardrails"
+        - "01 — Workload assessment (B.1.1)"
+        - "02 — Solution design (B.2.1)"
+        - "03 — Well-Architected review (B.2.2)"
+        - "04 — PoC / Pilot (B.2.3)"
+        - "05 — Deploy to production (B.3.1)"
+        - "06 — Service validation (B.4.1)"
+        - "07 — Handover documentation (B.4.2)"
+    validations:
+      required: true
+  - type: dropdown
+    id: role
+    attributes:
+      label: I am a…
+      options:
+        - Trainer (delivering the MicroHack)
+        - Learner (attending the MicroHack)
+        - Self-paced
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened / what was unclear?
+      description: Steps you took, what you expected, what you got.
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested improvement
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      placeholder: "Codespaces | local dev container | local VS Code"

@@ -1,0 +1,17 @@
+# Default owners for everything in this MicroHack.
+# These owners are requested for review on all pull requests.
+*       @NikoMix
+
+# Infrastructure (AVM) tracks
+/infra/bicep/        @NikoMix
+/infra/terraform/    @NikoMix
+
+# Copilot tooling (agents, skills, MCP)
+/.github/agents/     @NikoMix
+/.github/skills/     @NikoMix
+/.vscode/mcp.json    @NikoMix
+
+# Trainer assets
+/facilitator/        @NikoMix
+/solutions/          @NikoMix
+/slides/             @NikoMix

@@ -1,0 +1,13 @@
+app,vendor,personas,current_delivery,criticality,peripheral_or_runtime_dependency,delivery_decision,notes
+Microsoft 365 Apps,Microsoft,All,Installed on RDS/Citrix image,High,None,Install to image,Use shared activation; standard across all personas
+Microsoft Teams,Microsoft,All,Installed on image,High,Audio/video offload,Install to image (AVD media optimization),Enable Teams media optimization for AVD
+Microsoft Edge,Microsoft,All,Installed on image,High,None,Install to image,Default browser
+LOB CRM,Contoso (in-house),"Knowledge workers, Call centre",Citrix published app + RDS desktop,Critical,SQL back end; smartcard login,Install to image,Must remain available throughout migration; test smartcard redirection
+Finance Suite,Fabrikam Financials,Power users,Citrix published desktop,Critical,Excel add-ins; latency sensitive,Install to image (personal pool),Heavy; keep close to data; validate add-in performance
+Power BI Desktop,Microsoft,Power users,Installed on Citrix VDA,Medium,GPU helps,Install to image,Personal pool; consider GPU SKU if rendering heavy
+Developer IDE (VS / VS Code),Microsoft,Developers,Installed locally on Citrix,High,Admin rights; large disk,Install to image + per-user extensions,Personal pool; premium disk
+Docker / container tooling,OSS,Developers,Local on Citrix VDA,Medium,Nested virtualization,Per-user / personal pool,Requires VM sizes supporting nested virtualization
+Legacy Scanning App,Contoso (in-house),Knowledge workers (subset ~30),RDS RemoteApp,Low,TWAIN scanner redirection,RemoteApp,Niche; keep as RemoteApp; validate scanner redirection
+Legacy Java LOB tool,Vendor (EOL),Knowledge workers (subset ~50),RDS desktop,Medium,Old Java runtime,MSIX app attach,Isolate old runtime via app attach to avoid image conflicts
+Statutory Reporting Tool,GovSoft,Finance power users (subset ~15),Citrix published app,Medium,None,Replace with SaaS (evaluate),Vendor offers SaaS; assess during assessment
+Print Management,PrinterCo,All,Agent on image,Medium,Printer redirection,Install to image,Validate Universal Print as modern alternative

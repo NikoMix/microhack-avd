@@ -1,0 +1,65 @@
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# ---- Node / Astro (docs site) ----
+node_modules/
+.astro/
+dist/
+.cache/
+*.log
+npm-debug.log*
+.npm/
+.eslintcache
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.uv/
+
+# ---- Bicep ----
+*.bicep.json
+
+# ---- Terraform ----
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+# Keep example var files, ignore real ones
+terraform.tfvars
+*.auto.tfvars
+!*.tfvars.example
+
+# ---- Azure / secrets ----
+.azure/
+*.azureauth
+*.pem
+*.pfx
+.env
+.env.*
+!.env.example
+azureauth.json
+
+# ---- Learner working output (evidence is generated, not committed) ----
+work/
+out/
+output/
+**/evidence/**
+!**/evidence/.gitkeep
+
+# ---- Marp rendered output ----
+slides/**/*.html
+slides/**/*.pdf
+slides/**/*.pptx

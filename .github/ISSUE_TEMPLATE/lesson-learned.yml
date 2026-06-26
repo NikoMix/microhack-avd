@@ -1,0 +1,23 @@
+name: 💡 Lesson learned
+description: Share a delivery insight to fold back into the MicroHack (innersource).
+title: "[lesson] "
+labels: ["lesson-learned"]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Where in the engagement lifecycle did this come up?
+    validations:
+      required: true
+  - type: textarea
+    id: lesson
+    attributes:
+      label: The lesson
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Suggested change to the MicroHack
+      description: Which challenge / agent / skill / script should change, and how?

@@ -1,0 +1,13 @@
+source,host,platform,role,os,vcpu,ram_gb,avg_cpu_pct,peak_cpu_pct,avg_ram_pct,peak_concurrent_users,assigned_personas,notes
+MAP Toolkit,RDSH-N01,RDS,RD Session Host,Windows Server 2019,16,64,38,82,61,55,Knowledge workers,Morning logon storm drives CPU peak
+MAP Toolkit,RDSH-N02,RDS,RD Session Host,Windows Server 2019,16,64,41,88,64,58,Knowledge workers,Consistently busiest host
+MAP Toolkit,RDSH-N03,RDS,RD Session Host,Windows Server 2019,16,64,35,79,58,52,Knowledge workers,
+MAP Toolkit,RDSH-N04,RDS,RD Session Host,Windows Server 2019,16,64,40,85,62,57,Call centre,Shift change spikes
+MAP Toolkit,RDSH-S05,RDS,RD Session Host,Windows Server 2019,16,64,33,76,55,49,Call centre,DC-South
+Azure Migrate,RDGW-N01,RDS,RD Gateway,Windows Server 2019,4,16,22,61,40,N/A,All remote,Gateway saturates at peak remote load
+Citrix Director,CTX-VDA-N01,Citrix,VDA published desktop,Windows Server 2019,16,128,48,90,72,18,Power users,Finance suite heavy; memory pressure
+Citrix Director,CTX-VDA-N02,Citrix,VDA published desktop,Windows Server 2019,16,128,52,93,75,16,Power users,Highest RAM use; latency complaints
+Citrix Director,CTX-VDA-N03,Citrix,VDA published app,Windows Server 2019,8,64,44,87,68,22,Knowledge workers,LOB CRM published app
+Citrix Director,CTX-VDA-S04,Citrix,VDA published desktop,Windows Server 2019,16,128,39,81,60,12,Developers,Admin rights; container workloads
+Azure Migrate,FS-PROFILES-N,File,Profile file server,Windows Server 2016,8,32,55,95,80,N/A,All,Profile corruption + slow logon source; SAN IOPS bound
+Citrix Director,CTX-SF-N01,Citrix,StoreFront,Windows Server 2019,4,16,18,49,35,N/A,All,Front-end; replaced by AVD workspace
