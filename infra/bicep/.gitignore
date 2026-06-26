@@ -1,0 +1,3 @@
+# Compiled ARM templates emitted by `az bicep build` - build artifacts, never committed.
+*.json
+!bicepconfig.json
