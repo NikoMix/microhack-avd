@@ -74,7 +74,7 @@ module "log_analytics" {
   location            = var.location
   resource_group_name = module.rg.name
 
-  log_analytics_workspace_retention_in_days = var.logRetentionDays
+  log_analytics_workspace_retention_in_days = var.logAnalyticsRetentionDays
 
   tags             = local.tags
   enable_telemetry = var.enableTelemetry
@@ -121,7 +121,7 @@ module "vnet" {
   subnets = {
     avd = {
       name             = local.names.avd_subnet
-      address_prefixes = [var.avdSubnetPrefix]
+      address_prefixes = [var.sessionHostSubnetPrefix]
       network_security_group = {
         id = module.nsg.resource_id
       }
@@ -240,7 +240,7 @@ module "key_vault" {
     }
   }
   secrets_value = {
-    vmadmin = random_password.vm.result
+    vmadmin = local.admin_password
   }
 
   diagnostic_settings = local.diagnostics_to_law
@@ -351,7 +351,7 @@ module "scaling_plan" {
 module "session_host" {
   source  = "Azure/avm-res-compute-virtualmachine/azurerm"
   version = "0.21.0"
-  count   = var.sessionHostCount
+  count   = local.session_host_count
 
   name                = format("%s%02d", local.names.session_host_prefix, count.index)
   location            = var.location
@@ -361,10 +361,15 @@ module "session_host" {
   os_type  = "Windows"
   sku_size = var.sessionHostSize
 
+  # Trusted Launch (Gen2): Secure Boot + vTPM. Matches the Win11 multi-session
+  # Gen2 image and mirrors the Bicep track's security baseline.
+  secure_boot_enabled = true
+  vtpm_enabled        = true
+
   account_credentials = {
     admin_credentials = {
-      username                           = var.localAdminUsername
-      password                           = random_password.vm.result
+      username                           = var.sessionHostAdminUsername
+      password                           = local.admin_password
       generate_admin_password_or_ssh_key = false
     }
     password_authentication_disabled = false
@@ -472,7 +477,7 @@ resource "azurerm_consumption_budget_resource_group" "this" {
 }
 
 resource "azurerm_dev_test_global_vm_shutdown_schedule" "this" {
-  count = var.enableAutoShutdown ? var.sessionHostCount : 0
+  count = var.enableAutoShutdown ? local.session_host_count : 0
 
   virtual_machine_id    = module.session_host[count.index].resource_id
   location              = var.location

@@ -27,10 +27,15 @@ namePrefix  = "avd"
 # --- Session hosts ------------------------------------------------------------
 # Reference SKU for the knowledge-worker pool. Kept to 2 hosts here; production
 # capacity is derived per persona in the sizing assessment, not hard-coded.
-sessionHostCount = 2
-sessionHostSize  = "Standard_D8as_v5" # 8 vCPU / 32 GiB knowledge-worker reference
-hostPoolType     = "Pooled"
-maxSessionLimit  = 16
+deploySessionHosts = true
+sessionHostCount   = 2
+sessionHostSize    = "Standard_D8as_v5" # 8 vCPU / 32 GiB knowledge-worker reference
+hostPoolType       = "Pooled"
+maxSessionLimit    = 16
+
+# Break-glass local admin. Password is SENSITIVE — supply via the environment, never
+# commit it:  $env:TF_VAR_sessionHostAdminPassword = "<complex-password>"
+sessionHostAdminUsername = "avdadmin"
 
 # --- FSLogix profile storage (production posture) -----------------------------
 profileStorageQuotaGb = 1024
