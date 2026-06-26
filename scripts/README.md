@@ -1,6 +1,6 @@
 # Scripts — lab automation (contract)
 
-> **Status:** scaffolded — implemented by the deployment workstream. Cross-platform
+> **Status:** delivered by the deployment workstream. Cross-platform
 > **PowerShell 7+**; see [`.github/instructions/powershell.instructions.md`](../.github/instructions/powershell.instructions.md).
 
 Helper scripts for the live-deploy challenges. Each folder has one job. All scripts are
