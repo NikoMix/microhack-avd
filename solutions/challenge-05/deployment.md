@@ -29,7 +29,7 @@ Refuse to deploy until every box below is checked. Guardrails come **first**.
     needed for the lab slice).
   - **Entra Kerberos** enabled on the tenant and on storage account `stavdlabsec001` — this is a
     hard prerequisite for FSLogix on Azure Files with Entra Kerberos auth.
-  - Pilot security group (`sg-avd-pilot`) exists for app-group assignment and Conditional Access.
+  - Pilot security group (`grp-avd-lab-pilot`) exists for app-group assignment and Conditional Access.
 
 ### Required tags (every resource)
 
@@ -181,7 +181,7 @@ Each item below shows the **actual value verified** after apply.
   ```
 
   Storage auth = **Entra Kerberos**; share-level RBAC: *Storage File Data SMB Share Contributor*
-  on `profiles` for `sg-avd-pilot`; NTFS perms set on the share root. A test logon created
+  on `profiles` for `grp-avd-lab-pilot`; NTFS perms set on the share root. A test logon created
   `profiles\<sid>_<user>\Profile.vhdx` — profile container confirmed working.
 
 - **Scaling plan assigned** — `sp-avd-lab-sec` is **assigned to `hp-avd-lab-sec`** with autoscale
@@ -191,7 +191,7 @@ Each item below shows the **actual value verified** after apply.
 
 - **Conditional Access targeted** — policy `CA-AVD-Pilot-MFA` is **On** (not report-only),
   targeting cloud app **Azure Virtual Desktop** (+ Microsoft Remote Desktop) for group
-  `sg-avd-pilot`, granting access only with **MFA** + compliant/Entra-joined device.
+  `grp-avd-lab-pilot`, granting access only with **MFA** + compliant/Entra-joined device.
   Verified with What-If sign-in for a pilot user → policy applies.
 
 - **Monitoring / AVD Insights on** — diagnostic settings stream from the **host pool**,
@@ -207,7 +207,7 @@ Validation gates map to B.4.1 test cases.
 
 | Wave | Persona(s) | Entry criteria | Validation gate (→ B.4.1) | Comms |
 | --- | --- | --- | --- | --- |
-| 1 | Knowledge-worker pilot subset (~25 of 700) | Pilot "go" from B.2.3; baseline §4 green; `sg-avd-pilot` populated | Logon <30 s at peak; FSLogix container mounts; M365/Edge/Teams + LOB CRM verified; no P1 for 5 business days | T-5d email + lunch-and-learn; quick-start card; dedicated Teams support channel |
+| 1 | Knowledge-worker pilot subset (~25 of 700) | Pilot "go" from B.2.3; baseline §4 green; `grp-avd-lab-pilot` populated | Logon <30 s at peak; FSLogix container mounts; M365/Edge/Teams + LOB CRM verified; no P1 for 5 business days | T-5d email + lunch-and-learn; quick-start card; dedicated Teams support channel |
 | 2 | Call centre (200) | Wave 1 signed off; scaling plan schedule validated against shift pattern (90% peak) | Schedule scales hosts ahead of shift; CRM/Teams/Edge OK; concurrency holds at 90% with no capacity errors | T-5d shift-manager brief; per-shift floor-walkers day 1; rollback hotline |
 | 3 | Knowledge workers bulk (remaining ~675) | Wave 1 & 2 signed off; capacity model validated at 70% concurrency; host count scaled per HLD | Profile roams cleanly (5 GB); logon time held <30 s; CRM latency within SLA across full load | T-10d + T-2d staged emails by department; manager toolkit; FAQ |
 | 4 | Power users (60, Personal) | KW waves stable; personal host pool + memory-optimised hosts provisioned; 15 GB profiles sized | Finance Suite + Excel add-ins + Power BI validated; **Finance Suite zero downtime** confirmed; per-user personal host assignment works | 1:1 scheduling with Finance; named owner per desk; change-freeze window respected |
