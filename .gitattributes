@@ -1,0 +1,35 @@
+# Normalize all text files to LF in the repo and the working tree.
+# Keeps the dev container (Linux Codespaces) and Windows hosts consistent.
+* text=auto eol=lf
+
+# Shell scripts run inside the Linux dev container — must be LF.
+*.sh    text eol=lf
+
+# Cross-platform PowerShell 7 handles LF fine; keep it consistent with the rest.
+*.ps1   text eol=lf
+
+# Windows-only batch files (if ever added) stay CRLF.
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+
+# Infra / config as text (explicit for clarity).
+*.bicep text eol=lf
+*.tf    text eol=lf
+*.json  text eol=lf
+*.jsonc text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.md    text eol=lf
+*.csv   text eol=lf
+
+# Binary assets — no EOL conversion, no diff noise.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.svg   text eol=lf
+*.pdf   binary
+*.zip   binary
+*.woff  binary
+*.woff2 binary
