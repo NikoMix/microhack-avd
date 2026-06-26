@@ -1,0 +1,55 @@
+---
+title: 03 · Well-Architected review
+description: Module B control B.2.2 — review the AVD High-Level Design against the Well-Architected Framework through an AVD lens, leading with Cost, Performance, and Reliability.
+---
+
+import { Card, CardGrid, LinkCard, Aside } from '@astrojs/starlight/components';
+
+export const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
+
+| | |
+|---|---|
+| **Module B control** | **B.2.2** Well-Architected Review |
+| **Time-box** | 45 min |
+| **Lead agent** | `avd-waf-reviewer` |
+| **Evidence** | `waf-review.md` |
+
+## Objective
+
+Review the HLD against the **Azure Well-Architected Framework** through an **AVD lens** —
+**Cost, Performance Efficiency, and Reliability** first — and produce a **prioritised findings
+list** with a **decision register**, instead of generic advice.
+
+## The agentic way (do this first)
+
+- **Agent:** `avd-waf-reviewer`.
+- **Skills:** `avd-waf-lens` (the AVD-specific WAF checklist), `avd-cost-guardrails`.
+- **MCP:** `microsoft-learn` for WAF guidance; `azure` (Advisor) for live recommendations.
+
+## Evidence artifact
+
+`waf-review.md` — Cost / Performance / Reliability findings (and the other pillars), each with a
+severity and a recommendation, plus a decision register.
+
+## Definition of done
+
+- Findings span the pillars, **prioritising Cost, Performance, and Reliability** for AVD.
+- Each finding has a **severity** and a **specific, actionable** recommendation.
+- A **decision register** records each finding as accepted / mitigated / deferred, with rationale.
+- Findings are **specific to this HLD** — not generic WAF boilerplate.
+
+<Aside type="tip" title="Make it specific">
+  "Right-size the session-host SKU to D-series and cap pooled sessions at 8" beats "consider cost
+  optimisation". Tie every finding to a line in the HLD.
+</Aside>
+
+<LinkCard
+  title="Open the full challenge in the repo"
+  href="https://github.com/NikoMix/microhack-avd/tree/main/challenges/challenge-03-well-architected-review"
+  description="Step-by-step instructions, prerequisites, and trainer notes."
+/>
+
+<CardGrid>
+  <LinkCard title="← 02 Solution design" href={base + 'challenges/02-solution-design/'} />
+  <LinkCard title="Next · 04 PoC / Pilot →" href={base + 'challenges/04-poc-pilot/'} />
+</CardGrid>

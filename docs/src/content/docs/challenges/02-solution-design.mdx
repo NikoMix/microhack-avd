@@ -1,0 +1,59 @@
+---
+title: 02 · Solution design (HLD)
+description: Module B control B.2.1 — produce the AVD High-Level Design covering topology, identity, FSLogix, networking, golden image, autoscaling, and BCDR, mapped to Azure Verified Modules.
+---
+
+import { Card, CardGrid, LinkCard, Aside } from '@astrojs/starlight/components';
+
+export const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
+
+| | |
+|---|---|
+| **Module B control** | **B.2.1** Solution Design |
+| **Time-box** | 60 min |
+| **Lead agent** | `avd-architect` |
+| **Evidence** | `hld.md` |
+
+## Objective
+
+Produce the AVD **High-Level Design** from the assessment: **topology** (host pools per persona),
+**identity** (Entra-joined + Intune by default), **FSLogix** profile storage, **networking**,
+**golden image**, **autoscaling**, and **BCDR** — every choice mapped to an **Azure Verified
+Module** so it is directly buildable in `infra/`.
+
+## The agentic way (do this first)
+
+- **Agent:** `avd-architect`.
+- **Skills:** `avd-landing-zone` (AVM module map), `avd-fslogix` (profile storage), `avd-personas-sizing`,
+  `avd-evidence-pack` (the `hld.md` template).
+- **MCP:** `microsoft-learn` for AVD reference architecture; `azure` / `terraform` to confirm
+  module availability.
+
+## Evidence artifact
+
+`hld.md` — topology, identity, FSLogix, network, image, scaling, BCDR, plus an AVM module map and
+an architecture diagram.
+
+## Definition of done
+
+- **Host pools** mapped to personas (pooled multi-session vs. personal) with sizing from C01.
+- **Identity** decision stated (Entra-joined + Intune; hybrid only where on-prem apps require it).
+- **FSLogix** on **Azure Files Premium (Kerberos)** with share sizing; ANF only > 1,000 users.
+- **Network**, **golden image** pipeline, **scaling plan**, and **BCDR** all designed.
+- An **AVM module map** and a **diagram** make the design buildable in `infra/`.
+
+<Aside type="note" title="Defaults that matter">
+  Region default `swedencentral`; identity Entra-joined + Intune; profile storage FSLogix on Azure
+  Files Premium. Deviate only with a documented reason.
+</Aside>
+
+<LinkCard
+  title="Open the full challenge in the repo"
+  href="https://github.com/NikoMix/microhack-avd/tree/main/challenges/challenge-02-solution-design"
+  description="Step-by-step instructions, prerequisites, and trainer notes."
+/>
+
+<CardGrid>
+  <LinkCard title="← 01 Workload assessment" href={base + 'challenges/01-workload-assessment/'} />
+  <LinkCard title="Next · 03 Well-Architected review →" href={base + 'challenges/03-well-architected-review/'} />
+</CardGrid>

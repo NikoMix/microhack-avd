@@ -1,0 +1,91 @@
+---
+title: The agentic toolkit
+description: The GitHub Copilot custom agents, auto-activating skills, and MCP servers that deliver the AVD Module B engagement end-to-end.
+---
+
+import { Card, CardGrid, LinkCard, Aside } from '@astrojs/starlight/components';
+
+export const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
+
+This MicroHack's whole point is **doing consulting the agentic way**. Every challenge leads with
+"ask the `avd-…` agent / use the `…` skill / query the `…` MCP", then shows the manual fallback.
+A fleet of purpose-built Copilot **agents**, auto-activating **skills**, and live **MCP servers**
+does the heavy lifting while you supply the judgement.
+
+## Custom agents
+
+One **engagement lead** orchestrates; one specialist owns each Module B control. Hand off between
+phases — the lead tracks evidence completeness and guards cost. Source:
+[`.github/agents/`](https://github.com/NikoMix/microhack-avd/tree/main/.github/agents).
+
+| Agent | Control | What it does |
+|---|---|---|
+| `avd-engagement-lead` | — | Orchestrator. Plans the work, routes each phase to a specialist, tracks evidence, guards cost. **Start here.** |
+| `avd-assessor` | B.1.1 | Turns the RDS/Citrix estate into personas, an app inventory with delivery decisions, an image strategy, and host sizing/density. |
+| `avd-architect` | B.2.1 | Produces the High-Level Design — topology, identity, FSLogix, networking, golden image, autoscaling, BCDR — mapped to AVM. |
+| `avd-waf-reviewer` | B.2.2 | Reviews the HLD against the Well-Architected Framework (Cost, Performance, Reliability first) with a decision register. |
+| `avd-pilot-lead` | B.2.3 | Designs and evaluates the PoC/Pilot — scope, quantitative success criteria, results, and a go/no-go recommendation. |
+| `avd-deployment-engineer` | B.3.1 | Executes the production deployment from the AVM Bicep/Terraform landing zone, plus a cutover + rollback plan. Cost-aware. |
+| `avd-test-engineer` | B.4.1 | Runs service validation — logon performance, app launch, autoscaling, failover, FSLogix profile integrity. |
+| `avd-handover-writer` | B.4.2 | Assembles the operational handover — LLD, runbook, KT plan, hypercare plan, sign-off, lessons learned. |
+
+## Skills
+
+Reusable, **auto-activating** AVD knowledge modules. They fire when the topic is relevant — you
+don't invoke them by hand. Source:
+[`.github/skills/`](https://github.com/NikoMix/microhack-avd/tree/main/.github/skills).
+
+| Skill | What it carries |
+|---|---|
+| `avd-cost-guardrails` | Budgets, auto-shutdown, small SKUs, and teardown for running real deploys safely on a paid sub. |
+| `avd-evidence-pack` | The canonical format for every Module B evidence artifact (B.1.1–B.4.2), with reusable templates. |
+| `avd-fslogix` | FSLogix profile containers on Azure Files Premium with Entra Kerberos — sizing, settings, the ANF threshold. |
+| `avd-landing-zone` | Enterprise-scale reference architecture and the Azure Verified Module (AVM) map for the landing zone. |
+| `avd-migration-cutover` | RDS/Citrix → AVD migration patterns — discovery mapping, wave planning, coexistence, cutover, rollback. |
+| `avd-personas-sizing` | Session-host sizing and density math — VM families, users-per-host, FSLogix IOPS. |
+| `avd-waf-lens` | The Well-Architected Framework checklist viewed through an AVD lens, for specific prioritised findings. |
+
+## MCP servers
+
+Model Context Protocol servers give the agents **live tools and authoritative docs**. Config:
+[`.vscode/mcp.json`](https://github.com/NikoMix/microhack-avd/blob/main/.vscode/mcp.json).
+
+| MCP server | Transport | Purpose |
+|---|---|---|
+| `github` | HTTP | Issues / PRs / repo as the engagement task board. |
+| `azure` | stdio (`npx @azure/mcp`) | Live Azure resource, deployment, cost, and quota tools. |
+| `microsoft-learn` | HTTP | Authoritative Microsoft / AVD documentation, grounded with links. |
+| `terraform` | stdio (Docker) | Terraform Registry module and provider lookup. |
+
+<Aside type="tip" title="Route work to the right tool">
+  When you ask "how do I…", prefer grounding in the **`microsoft-learn`** MCP over recalling from
+  memory. When acting on Azure, use the **`azure`** MCP rather than guessing resource state. Use
+  **`github`** issues/PRs as the live engagement board.
+</Aside>
+
+## How they fit together
+
+<CardGrid>
+  <Card title="Lead orchestrates" icon="rocket">
+    Adopt `avd-engagement-lead`. It sequences the controls, delegates to specialists, and verifies
+    each evidence artifact before moving on.
+  </Card>
+  <Card title="Specialists execute" icon="seti:powershell">
+    Each control's specialist agent does the deep work — assessment, design, review, pilot, deploy,
+    validate, handover.
+  </Card>
+  <Card title="Skills ground it" icon="open-book">
+    Skills auto-activate to enforce sizing math, FSLogix rules, cost guardrails, and evidence
+    formats — consistent across every learner.
+  </Card>
+  <Card title="MCP acts & cites" icon="external">
+    MCP servers give the agents live Azure actions and first-party documentation, so answers are
+    grounded and changes are real.
+  </Card>
+</CardGrid>
+
+<LinkCard
+  title="See the toolkit in action — start the challenges"
+  href={base + 'challenges/'}
+  description="Each challenge names the agent, skill, and MCP to use first."
+/>

@@ -1,0 +1,28 @@
+{
+  "name": "microhack-avd-docs",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Astro + Starlight documentation site for the AVD Module B MicroHack (The Agentic Engagement).",
+  "license": "MIT",
+  "homepage": "https://nikomix.github.io/microhack-avd",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NikoMix/microhack-avd.git",
+    "directory": "docs"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "0.41.1",
+    "astro": "7.0.3",
+    "sharp": "0.34.5"
+  }
+}
