@@ -220,7 +220,7 @@ module "storage" {
 
 module "key_vault" {
   source  = "Azure/avm-res-keyvault-vault/azurerm"
-  version = "0.10.2"
+  version = "0.11.0"
 
   name                = local.names.key_vault
   location            = var.location
