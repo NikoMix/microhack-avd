@@ -1,0 +1,57 @@
+---
+title: 01 · Workload assessment
+description: Module B control B.1.1 — turn Contoso's RDS/Citrix estate into personas, an app inventory with delivery decisions, an image strategy, and defensible host sizing.
+---
+
+import { Card, CardGrid, LinkCard, Aside } from '@astrojs/starlight/components';
+
+export const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
+
+| | |
+|---|---|
+| **Module B control** | **B.1.1** Workload Assessment |
+| **Time-box** | 60 min |
+| **Lead agent** | `avd-assessor` |
+| **Evidence** | `assessment.md` |
+
+## Objective
+
+Turn Contoso's on-premises **RDS + Citrix** estate into a defensible AVD workload assessment:
+**personas**, an **application inventory** with a delivery decision per app, an **image strategy**,
+and **host sizing/density** — framed with **MAP Toolkit / Azure Migrate** discovery.
+
+## The agentic way (do this first)
+
+- **Agent:** `avd-assessor`.
+- **Skills:** `avd-personas-sizing` (sizing & density math), `avd-migration-cutover` (RDS/Citrix
+  mapping), `avd-evidence-pack` (the `assessment.md` template).
+- **MCP:** `microsoft-learn` to ground AVD host-pool and sizing guidance; `github` as the board.
+
+## Evidence artifact
+
+`assessment.md` — personas, app inventory + delivery decisions, image strategy, sizing/density,
+and a MAP / Azure Migrate framing.
+
+## Definition of done
+
+- The four personas reconcile to **700 + 200 + 60 + 40 = 1,000**.
+- Every application has a **delivery decision** (image, MSIX/app-attach, RemoteApp, retire…).
+- An **image strategy** (single vs. per-persona golden image) is stated and justified.
+- **Host sizing/density** is **calculated**, not guessed (VM family, users-per-host, IOPS).
+- Discovery is framed against **MAP Toolkit / Azure Migrate / Citrix Director** data.
+
+<Aside type="tip" title="Reconcile the numbers">
+  An auditor checks arithmetic first. Make the persona counts, density math, and totals tie out
+  before you write the narrative.
+</Aside>
+
+<LinkCard
+  title="Open the full challenge in the repo"
+  href="https://github.com/NikoMix/microhack-avd/tree/main/challenges/challenge-01-workload-assessment"
+  description="Step-by-step instructions, prerequisites, and trainer notes."
+/>
+
+<CardGrid>
+  <LinkCard title="← 00 Setup & guardrails" href={base + 'challenges/00-setup/'} />
+  <LinkCard title="Next · 02 Solution design →" href={base + 'challenges/02-solution-design/'} />
+</CardGrid>

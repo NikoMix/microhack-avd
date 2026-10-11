@@ -1,0 +1,53 @@
+---
+title: 00 · Setup & guardrails
+description: Foundation challenge — stand up the lab, sign in to your own Azure subscription, confirm the Copilot agents/skills/MCP servers are live, and deploy a cost cap.
+---
+
+import { Card, CardGrid, LinkCard, Aside } from '@astrojs/starlight/components';
+
+export const base = import.meta.env.BASE_URL.replace(/\/$/, '') + '/';
+
+| | |
+|---|---|
+| **Module B control** | — (foundation) |
+| **Time-box** | 45 min |
+| **Lead agent** | `avd-engagement-lead` |
+| **Evidence** | A working environment + a deployed cost cap |
+
+## Objective
+
+Stand up your lab environment, sign in to **your own Azure subscription**, confirm the GitHub
+Copilot **agents, skills, and MCP servers** are live, and deploy a **budget + auto-shutdown** so
+the rest of the day's real deployments can never surprise you on cost.
+
+## The agentic way (do this first)
+
+- **Agent:** adopt `avd-engagement-lead` and run the `/start-engagement` prompt — it reads the
+  scenario and tells you what to do next.
+- **Skill:** `avd-cost-guardrails` carries the cost-safety rules the lead enforces.
+- **MCP:** use `azure` to check region/quota and create the budget, `github` to see the engagement
+  issues, and `microsoft-learn` for a grounding smoke test.
+
+## Definition of done
+
+- Toolchain verified (`az`, `azd`, `bicep`, `terraform`, `gh`, `pwsh` all report versions).
+- Signed in to **your own** Azure subscription (`az account show` correct).
+- All eight `avd-*` agents visible; the four MCP servers respond.
+- A **budget with alerts** exists on your subscription/resource group.
+- You can explain what will be deployed today and **how you'll tear it down**.
+
+<Aside type="caution" title="Guardrails before resources">
+  Every later challenge deploys real, billable resources. Deploy the budget + auto-shutdown
+  **before** anything else, and build the teardown habit now.
+</Aside>
+
+<LinkCard
+  title="Open the full challenge in the repo"
+  href="https://github.com/NikoMix/microhack-avd/tree/main/challenges/challenge-00-setup"
+  description="Step-by-step instructions, prerequisites, and trainer notes."
+/>
+
+<CardGrid>
+  <LinkCard title="← All challenges" href={base + 'challenges/'} />
+  <LinkCard title="Next · 01 Workload assessment →" href={base + 'challenges/01-workload-assessment/'} />
+</CardGrid>

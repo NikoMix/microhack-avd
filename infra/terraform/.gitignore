@@ -1,0 +1,32 @@
+# Terraform — local state, provider cache, and crash logs
+.terraform/
+.terraform.tfstate.lock.info
+
+# State files (never commit; local backend only in this MicroHack)
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# Provider lock file IS committed: it is generated with checksums for linux_amd64,
+# linux_arm64, darwin_amd64, darwin_arm64, and windows_amd64 (see README) so the
+# Linux CI runner and learner workstations all get reproducible provider versions.
+# Regenerate with: terraform providers lock -platform=...
+#   (do NOT add it back to this ignore list)
+
+# Plan output
+*.tfplan
+tfplan
+plan.out
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Local-only / sensitive variable files (lab.tfvars + prod.tfvars ARE committed)
+*.auto.tfvars
+*.local.tfvars
+secrets.tfvars
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json

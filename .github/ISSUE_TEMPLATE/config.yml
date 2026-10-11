@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: AVD Advanced Specialization toolkit
+    url: https://github.com/NikoMix/specialization-avd
+    about: The audit checklist and engagement playbook this MicroHack is built on.
+  - name: Microsoft Learn — Azure Virtual Desktop
+    url: https://learn.microsoft.com/azure/virtual-desktop/
+    about: Authoritative AVD product documentation.

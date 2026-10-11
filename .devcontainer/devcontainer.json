@@ -1,0 +1,102 @@
+// AVD Module B MicroHack — dev container
+// Opens identically in GitHub Codespaces and local VS Code (Dev Containers).
+// Everything a learner needs (az, azd, bicep, terraform, gh, node, pwsh, python,
+// Copilot agents/skills/MCP) is pre-installed and pre-configured.
+{
+  "name": "AVD Module B MicroHack",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+
+  "features": {
+    "ghcr.io/devcontainers/features/azure-cli:1": {
+      "installBicep": true,
+      "version": "latest"
+    },
+    "ghcr.io/azure/azure-dev/azd:latest": {},
+    "ghcr.io/devcontainers/features/terraform:1": {
+      "version": "latest",
+      "tflint": "latest",
+      "terragrunt": "none"
+    },
+    "ghcr.io/devcontainers/features/powershell:2": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12",
+      "installTools": false
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+
+  // Run once after the container is created: verify the toolchain, install the
+  // PowerShell analyzers + AVD-friendly CLI bits, and the docs/slides tooling.
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+
+  "containerEnv": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUNBUFFERED": "1"
+  },
+
+  "remoteEnv": {
+    // Default Azure region for the labs. Override per challenge if you prefer.
+    "AZURE_DEFAULTS_LOCATION": "swedencentral",
+    // Pass GH_TOKEN from host → container so `gh` and the GitHub MCP server work
+    // without an interactive login. Set it once in VS Code User Settings:
+    //   "terminal.integrated.env.linux": { "GH_TOKEN": "ghp_yourTokenHere" }
+    // In Codespaces this is provided automatically.
+    "GH_TOKEN": "${localEnv:GH_TOKEN}"
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "ms-azuretools.vscode-bicep",
+        "HashiCorp.terraform",
+        "ms-azuretools.vscode-azureterraform",
+        "ms-azuretools.vscode-azureresourcegroups",
+        "ms-vscode.azurecli",
+        "ms-azuretools.azure-dev",
+        "ms-vscode.powershell",
+        "ms-python.python",
+        "DavidAnson.vscode-markdownlint",
+        "redhat.vscode-yaml",
+        "bierner.markdown-mermaid",
+        "marp-team.marp-vscode",
+        "esbenp.prettier-vscode",
+        "mechatroner.rainbow-csv",
+        "github.vscode-github-actions"
+      ],
+      "settings": {
+        "files.eol": "\n",
+        "editor.formatOnSave": false,
+        // --- GitHub Copilot: load this repo's agents, skills, instructions ---
+        "chat.useAgentsMdFile": true,
+        "chat.useNestedAgentsMdFiles": true,
+        "chat.customAgentInSubagent.enabled": true,
+        "chat.agentFilesLocations": {
+          ".github/agents": true
+        },
+        "chat.agentSkillsLocations": {
+          ".github/skills": true
+        },
+        "chat.instructionsFilesLocations": {
+          ".github/instructions": true
+        },
+        "chat.promptFilesLocations": {
+          ".github/prompts": true
+        },
+        // --- Linters / formatters ---
+        "markdownlint.configFile": ".markdownlint.jsonc",
+        "[bicep]": { "editor.defaultFormatter": "ms-azuretools.vscode-bicep" },
+        "[terraform]": { "editor.defaultFormatter": "HashiCorp.terraform" }
+      }
+    }
+  }
+}

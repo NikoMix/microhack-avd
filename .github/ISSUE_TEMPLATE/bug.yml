@@ -1,0 +1,43 @@
+name: 🐞 Bug report
+description: A script, IaC template, workflow, or instruction does not work.
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Exact commands and the challenge/file involved.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant output / error
+      render: shell
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Dev container / Codespaces
+        - Bicep (infra)
+        - Terraform (infra)
+        - Scripts (setup / load-test / validate / reset)
+        - Challenge instructions
+        - Copilot agent / skill / MCP
+        - Docs site / slides
+    validations:
+      required: true

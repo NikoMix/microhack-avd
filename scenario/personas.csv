@@ -1,0 +1,5 @@
+persona,department,users,peak_concurrency_pct,work_pattern,key_apps,pool_type,os,profile_size_gb,notes
+Knowledge workers,"Sales, Ops, HR, Finance-light",700,70,"Office hours, hybrid remote, morning logon storm","M365 apps, Edge, Teams, LOB CRM",Pooled multi-session,Windows 11 Enterprise multi-session,5,"Largest group; standardised app set; ideal for pooled multi-session"
+Call centre,Customer Service,200,90,"Shift-based, high concurrency, predictable hours, shared thin clients","LOB CRM, Teams, Edge",Pooled multi-session,Windows 11 Enterprise multi-session,3,"High density, light apps; strong autoscale candidate on a fixed schedule"
+Power users,"Finance, BI, Management",60,80,"Office hours, heavy spreadsheets and BI, latency sensitive","Finance suite, Excel add-ins, Power BI, M365",Personal,Windows 11 Enterprise,15,"Heavy single-user workloads; persistent; memory-optimised hosts"
+Developers,Engineering,40,75,"Flexible hours, admin rights, local containers/VMs, large repos","IDEs, Docker, Git, Azure tools, M365",Personal,Windows 11 Enterprise,30,"Need admin rights and custom installs; premium disk; personal pool"

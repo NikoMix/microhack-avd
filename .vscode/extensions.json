@@ -1,0 +1,23 @@
+{
+  // Extensions VS Code will recommend when this repo is opened locally.
+  // Mirrors the dev container so local and Codespaces learners get the same tools.
+  "recommendations": [
+    "GitHub.copilot",
+    "GitHub.copilot-chat",
+    "ms-azuretools.vscode-bicep",
+    "HashiCorp.terraform",
+    "ms-azuretools.vscode-azureterraform",
+    "ms-azuretools.vscode-azureresourcegroups",
+    "ms-vscode.azurecli",
+    "ms-azuretools.azure-dev",
+    "ms-vscode.powershell",
+    "ms-python.python",
+    "DavidAnson.vscode-markdownlint",
+    "redhat.vscode-yaml",
+    "bierner.markdown-mermaid",
+    "marp-team.marp-vscode",
+    "esbenp.prettier-vscode",
+    "mechatroner.rainbow-csv",
+    "github.vscode-github-actions"
+  ]
+}

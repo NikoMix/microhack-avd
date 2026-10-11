@@ -1,0 +1,22 @@
+{
+  // Workspace settings — also applied outside the dev container (local VS Code).
+  "files.eol": "\n",
+  "chat.useAgentsMdFile": true,
+  "chat.useNestedAgentsMdFiles": true,
+  "chat.customAgentInSubagent.enabled": true,
+  "chat.agentFilesLocations": {
+    ".github/agents": true
+  },
+  "chat.agentSkillsLocations": {
+    ".github/skills": true
+  },
+  "chat.instructionsFilesLocations": {
+    ".github/instructions": true
+  },
+  "chat.promptFilesLocations": {
+    ".github/prompts": true
+  },
+  "markdownlint.configFile": ".markdownlint.jsonc",
+  "[bicep]": { "editor.defaultFormatter": "ms-azuretools.vscode-bicep" },
+  "[terraform]": { "editor.defaultFormatter": "HashiCorp.terraform" }
+}
