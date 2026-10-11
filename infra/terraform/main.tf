@@ -283,7 +283,7 @@ module "hostpool" {
 
 module "application_group" {
   source  = "Azure/avm-res-desktopvirtualization-applicationgroup/azurerm"
-  version = "0.2.1"
+  version = "0.3.0"
 
   virtual_desktop_application_group_host_pool_id        = module.hostpool.resource_id
   virtual_desktop_application_group_location            = var.location
