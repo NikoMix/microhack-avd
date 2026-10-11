@@ -90,7 +90,7 @@ module "log_analytics" {
 
 module "nsg" {
   source  = "Azure/avm-res-network-networksecuritygroup/azurerm"
-  version = "0.5.1"
+  version = "0.6.0"
 
   name                = local.names.nsg
   location            = var.location
