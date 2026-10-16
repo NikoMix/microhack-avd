@@ -18,7 +18,7 @@ jobs:
     name: Markdown lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: markdownlint-cli2
         uses: DavidAnson/markdownlint-cli2-action@v19
         with:
@@ -31,7 +31,7 @@ jobs:
     name: Link check (offline / relative)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: lychee (relative links only)
         uses: lycheeverse/lychee-action@v2
         with:
@@ -42,7 +42,7 @@ jobs:
     name: Bicep build + lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Detect Bicep files
         id: detect
         run: echo "count=$(find infra -name '*.bicep' 2>/dev/null | wc -l)" >> "$GITHUB_OUTPUT"
@@ -63,7 +63,7 @@ jobs:
     name: Terraform fmt + validate
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Detect Terraform
         id: detect
         run: |
@@ -89,7 +89,7 @@ jobs:
     name: PSScriptAnalyzer
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Detect scripts
         id: detect
         run: echo "count=$(find scripts -name '*.ps1' 2>/dev/null | wc -l)" >> "$GITHUB_OUTPUT"
@@ -112,7 +112,7 @@ jobs:
     name: Docs build (Astro / Starlight)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Detect docs
         id: detect
         run: |
@@ -134,7 +134,7 @@ jobs:
     name: Slides render (Marp)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Detect slides
         id: detect
         run: |

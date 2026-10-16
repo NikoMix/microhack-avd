@@ -24,7 +24,7 @@ jobs:
     outputs:
       present: ${{ steps.detect.outputs.present }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Detect docs site
         id: detect
         run: |
